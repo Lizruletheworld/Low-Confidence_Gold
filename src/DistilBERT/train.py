@@ -7,6 +7,11 @@ from transformers import DistilBertTokenizer, DistilBertModel
 import torch
 import argparse
 
+if torch.cuda.is_available():
+    device = "cuda"
+else:
+    device = "cpu"
+
 # Parse command line arguments
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -42,11 +47,10 @@ def data_process():
     return dataloader
 
 def train():
+
     dataloader = data_process()
 
     args = parse_args()
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # Use GPU or CPU
 
     model = BertClassify(args.n_classes).to(device)
 
