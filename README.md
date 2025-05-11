@@ -18,8 +18,8 @@ The framework's efficacy while maintaining model performance establishes a promi
 
 ## Approach
 
-<p align="center" width="40%">
-<a ><img src="approach.png" alt="overview" style="width: 40%; min-width: 300px; display: block; margin: auto;"></a>
+<p align="center" width="90%">
+<a ><img src="lcg.png" alt="overview" style="width: 90%; min-width: 300px; display: block; margin: auto;"></a>
 </p>
 
 ## Usage 🛠
@@ -38,16 +38,21 @@ Default setting
 ```bash
 python Clustering/cluster.py  --input='XX.json'
 ```
-> 'XX.json' needs to be in the format of 'alpaca_data.json'.Then you can get the training set and the test set.
-
-
-
+> 'XX.json' needs to be in the format of 'alpaca_data.json'.Then you can get the train dataset ,the first part of new dataset and the alpaca52k with labels.
 ### Semi-supervised learning
 
 We gave two models as semi-supervised model examples, one is DistilBERT and the other is MultinomialNB.
 ```bash
-python DistilBERT/train.py  --input='XX.json'
+python src/DistilBERT/train.py  --train_data_path='train_dataset.json' --json_data_path = 'XX.json'
+python src/DistilBERT/test.py  --test_data_path='alpaca_labels.json' --json_data_path = 'XX.json' --test_data_path='alpaca_labels.json'
 ```
-> 'XX.json' needs to be in the format of training set.
+If you want to use MultinomialNB method, please run it.
+```bash
+python src/MultinomialNB/sample.py  --test_data_path='alpaca_labels.json' --json_data_path = 'XX.json' --test_data_path='alpaca_labels.json'
+```
+> Then you can get the last part of new dataset.
+### Get dataset
+
+Finally, merging the two datasets will yield a new dataset.
 
 

@@ -6,18 +6,19 @@ from torch.utils.data import DataLoader, TensorDataset
 from transformers import DistilBertTokenizer, DistilBertModel
 import torch
 import argparse
-
+import json
 # Parse command line arguments
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--json_data_path", type=str, default='alpaca_data_cleaned.json')
     parser.add_argument("--train_data_path", type=str, default='train_dataset.json')
-    parser.add_argument("--test_data_path", type=str, default='test_dataset.json')
+    parser.add_argument("--test_data_path", type=str, default='alpaca_labels.json')
     parser.add_argument("--n_classes", type=int, default=40)
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--learning_rate", type=float, default='1e-5')
     parser.add_argument("--weight_decay", type=float, default=1e-2)
     parser.add_argument("--batch_size", type=int, default=16)
+    parser.add_argument("--sample_size", type=int, default=5200)
     args = parser.parse_args()
     return args
 
@@ -87,6 +88,32 @@ def test():
     # Calculate accuracy
     accuracy = np.mean(np.array(predicted_classes) == targets)
     print(f'Accuracy: {accuracy}')
+
+    incorrect_predictions_idx  = np.where(np.array(predicted_classes) != targets)[0]
+
+    # Extract the confidence of samples with prediction errors.
+    incorrect_confidences = [predictions[i][predicted_classes[i]] for i in incorrect_predictions_idx]
+
+    # Combine the indices and confidence levels of the incorrectly predicted samples, and sort them by confidence level.
+    sorted_incorrect_by_confidence = sorted(zip(incorrect_predictions_idx, incorrect_confidences), key=lambda x: x[1])
+
+
+    # Get top indices with lowest confidence
+    top_incorrect_idx = [idx for idx, _ in sorted_incorrect_by_confidence[:args.sample_size]]
+
+    # Extract complete records for these indices from the original dataset
+    file_path = args.test_data_path
+    ds = load_dataset('json', data_files=file_path)
+    low_confidence_full_data = [ds['train'][int(i)] for i in top_incorrect_idx]
+
+    # Save to JSON file
+    filename = f'distilbert_low_confidence.json'
+    with open(filename, 'w') as f:
+        json.dump(low_confidence_full_data, f)
+
+
+
+
 
 if __name__ == '__main__':
     test()

@@ -32,7 +32,7 @@ def encode_texts(texts):
 
 def data_process():
     args = parse_args()
-    new_dataframe = pd.read_json('E:/alpaca/closest_texts_data_k_40_40.json')
+    new_dataframe = pd.read_json('train_dataset.json')
     X_labeled = new_dataframe.apply(lambda row: {'input': row['input'], 'instruction': row['instruction']},
                                     axis=1).tolist()
     y_labeled = new_dataframe['cluster'].values
