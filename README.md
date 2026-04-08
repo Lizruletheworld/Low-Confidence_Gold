@@ -1,6 +1,6 @@
 <h1 align="center">Low-Confidence Gold: Refining Low-Confidence Samples for Efficient Instruction Tuning</h1>
 <!-- Clustering and Ranking: Diversity-preserved Instruction Selection through Expert-aligned Quality Estimation -->
-<h4 align="center"> Hongyi cal, jie li, wenzhen Dong</h4>
+<h4 align="center"> Hongyi Cai, Jie Li, Wenzhen Dong</h4>
 
 
 - ## News💡
