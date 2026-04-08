@@ -3,7 +3,8 @@
 <h4 align="center"> Hongyi cal, jie li, wenzhen Dong</h4>
 
 
-## News💡
+- ## News💡
+- [2025.05] 🎉 Our paper has been accepted by **EMNLP Findings 2025**!
 - [2025.01] We release our 📄<a href="https://arxiv.org/abs/2502.18978">paper</a>. If you have any questions about our project, please send email to xcloudfance@gmail.com
 
 ## Overview
@@ -54,5 +55,22 @@ python src/MultinomialNB/sample.py  --test_data_path='alpaca_labels.json' --json
 ### Get dataset
 
 Finally, merging the two datasets will yield a new dataset.
+
+
+## Citation
+
+If you find this work useful for your research, please cite our paper:
+
+```bibtex
+
+@misc{cai2025lowconfidencegoldrefininglowconfidence,
+      title={Low-Confidence Gold: Refining Low-Confidence Samples for Efficient Instruction Tuning}, 
+      author={Hongyi Cai and Jie Li and Mohammad Mahdinur Rahman and Wenzhen Dong},
+      year={2025},
+      eprint={2502.18978},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={[https://arxiv.org/abs/2502.18978](https://arxiv.org/abs/2502.18978)}, 
+}
 
 
