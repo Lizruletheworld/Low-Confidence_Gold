@@ -29,8 +29,8 @@ The framework's efficacy while maintaining model performance establishes a promi
 First, [install PyTorch 1.7.1](https://pytorch.org/get-started/locally/) (or later) and torchvision, as well as small additional dependencies, and then install this repo as a Python package. On a CUDA GPU machine, the following will do the trick:
 
 ```bash
-$ conda install --yes -c pytorch pytorch=1.7.1 torchvision cudatoolkit=11.0
-$ pip install git+https://github.com/Lizruletheworld/Low-Confidence_Gold.git
+conda install --yes -c pytorch pytorch=1.7.1 torchvision cudatoolkit=11.0
+pip install git+https://github.com/Lizruletheworld/Low-Confidence_Gold.git
 ```
 
 ### Clustering
